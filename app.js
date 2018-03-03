@@ -14,6 +14,33 @@ app.get('/', function(req, res){
   res.sendFile(path.join(__dirname, 'views/index.html'));
 });
 
+app.get('/upload.html', function(req, res){
+  res.sendFile(path.join(__dirname, 'views/upload.html'));
+});
+
+app.get('/download.html', function(req, res){
+  res.sendFile(path.join(__dirname, 'views/download.html'));
+});
+
+app.get('/:file(*)', function(req, res, next){ // this routes all types of file
+  var path=require('path');
+  var file = req.params.file;
+  var path = path.resolve(".")+'/uploads/'+file;
+  res.download(path); // magic of download fuction
+});
+
+app.post('/download', function(req, res) { // create download route
+    var path=require('path'); // get path
+    var dir=path.resolve(".")+'/uploads/'; // give path
+    fs.readdir(dir, function(err, list) { // read directory return  error or list
+      if (err) return res.json(err);
+      else {
+        console.log(list);
+        res.json(list);
+      }
+    });
+});
+
 app.post('/upload', function(req, res){
 
   // create an incoming form object
@@ -58,7 +85,7 @@ app.post('/upload', function(req, res){
 
   // once all the files have been uploaded, send a response to the client
   form.on('end', function() {
-    res.end('success');
+    res.end('Success');
   });
 
   // parse the incoming request containing the form data
