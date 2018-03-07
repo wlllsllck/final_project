@@ -7,8 +7,11 @@ var crypto = require('crypto');
 const contractInstance = require('./deployContract.js');
 const web3 = require('./web3Client.js');
 var algorithm = 'sha256';
+var bodyParser = require('body-parser');
+const store = require('./store')
 
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(bodyParser.json());
 
 app.get('/', function(req, res){
   res.sendFile(path.join(__dirname, 'views/index.html'));
@@ -26,6 +29,7 @@ app.get('/:file(*)', function(req, res, next){ // this routes all types of file
   var path=require('path');
   var file = req.params.file;
   var path = path.resolve(".")+'/uploads/'+file;
+  //console.log(web3.)
   res.download(path); // magic of download fuction
 });
 
@@ -70,7 +74,19 @@ app.post('/upload', function(req, res){
           else {
             shasum.update(data);
             const d = shasum.digest('hex');
-            contractInstance.file_dgst(d, {from: web3.eth.accounts[0]});
+            var transaction_id = contractInstance.file_dgst(d, {from: web3.eth.accounts[0]});
+            //console.log(transaction_id);
+            var blockNumber = web3.eth.getTransaction(transaction_id).blockNumber;
+            var input = web3.eth.getTransaction(transaction_id).input;
+            var temp_string = input.substr(138);
+              store
+                .upload({
+                  file_name: file.name,
+                  transaction: transaction_id,
+                  blockNumber: blockNumber
+                })
+                //.then(() => res.sendStatus(200))
+            console.log(temp_string);
             console.log(d); 
           }
         })
