@@ -39,7 +39,34 @@ con.connect(function(err) {
     var path=require('path');
     var file = req.params.file;
     var path = path.resolve(".")+'/uploads/'+file;
-    //console.log(web3.)
+    var shasum = crypto.createHash(algorithm);
+    //console.log(file);
+    var sql = 'SELECT transaction FROM user WHERE file_name = ?';
+    con.query(sql, [file], function (err, result) {
+    if (err) throw err;
+      var transaction = result[0].transaction;
+      var input = web3.eth.getTransaction(transaction).input;
+      var temp_string = input.substr(138);
+      var temp_string_length = temp_string.length;
+      //console.log(temp_string_length);
+      var blockchain_hash_value = '';
+      for (var i = 0; i<temp_string_length; i+=2) {
+        var temp_hash = String.fromCharCode(parseInt(temp_string.substr(i, 2), 16));
+        //console.log(temp_hash);
+        blockchain_hash_value += temp_hash;    
+      }
+      console.log('blockchain');
+      console.log(blockchain_hash_value);
+    });
+    fs.readFile(path, function(err, data) {
+      if (err) console.log(err);
+      else {
+        shasum.update(data);
+        var server_hash_value = shasum.digest('hex');
+        console.log('server');
+        console.log(server_hash_value);
+      }
+    });
     res.download(path); // magic of download fuction
   });
 
@@ -88,19 +115,19 @@ con.connect(function(err) {
               var transaction_id = contractInstance.file_dgst(d, {from: web3.eth.accounts[0]});
               //console.log(transaction_id);
               var blockNumber = web3.eth.getTransaction(transaction_id).blockNumber;
-              var input = web3.eth.getTransaction(transaction_id).input;
-              var temp_string = input.substr(138);
+              // var input = web3.eth.getTransaction(transaction_id).input;
+              // var temp_string = input.substr(138);
             
               var sql = 'INSERT INTO user (file_name, transaction, blockNumber) VALUES (' 
                       + '"' + file_name + '"' + ',' + '"' + transaction_id + '"' +  ',' + '"' + blockNumber + '"' + ')';
-              console.log(sql);
+              //console.log(sql);
               con.query(sql, function (err, result) {
               if (err) throw err;
                 console.log("1 record inserted");
                 
               });
-              console.log(temp_string);
-              console.log(d); 
+              // console.log(temp_string);
+              // console.log(d); 
             }
           })
         } 
