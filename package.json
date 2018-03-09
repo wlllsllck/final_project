@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "express": "^4.16.2",
+    "formidable": "^1.2.0",
+    "ganache-cli": "^6.1.0",
+    "mysql": "^2.15.0",
+    "solc": "^0.4.21",
+    "web3": "^0.20.2"
+  }
+}

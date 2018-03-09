@@ -18,6 +18,7 @@ var con = mysql.createConnection({
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
+app.set('view engine', 'pug');
 
 con.connect(function(err) {
   if (err) throw err;
@@ -35,6 +36,10 @@ con.connect(function(err) {
     res.sendFile(path.join(__dirname, 'views/download.html'));
   });
 
+  app.get('/verify.html', function(req, res){
+    res.sendFile(path.join(__dirname, 'views/verify.html'));
+  });
+
   app.get('/:file(*)', function(req, res, next){ // this routes all types of file
     var path=require('path');
     var file = req.params.file;
@@ -42,6 +47,7 @@ con.connect(function(err) {
     var shasum = crypto.createHash(algorithm);
     //console.log(file);
     var sql = 'SELECT transaction FROM user WHERE file_name = ?';
+    var blockchain_hash_value = '';
     con.query(sql, [file], function (err, result) {
     if (err) throw err;
       var transaction = result[0].transaction;
@@ -49,7 +55,6 @@ con.connect(function(err) {
       var temp_string = input.substr(138);
       var temp_string_length = temp_string.length;
       //console.log(temp_string_length);
-      var blockchain_hash_value = '';
       for (var i = 0; i<temp_string_length; i+=2) {
         var temp_hash = String.fromCharCode(parseInt(temp_string.substr(i, 2), 16));
         //console.log(temp_hash);
@@ -58,6 +63,7 @@ con.connect(function(err) {
       console.log('blockchain');
       console.log(blockchain_hash_value);
     });
+    
     fs.readFile(path, function(err, data) {
       if (err) console.log(err);
       else {
@@ -65,9 +71,18 @@ con.connect(function(err) {
         var server_hash_value = shasum.digest('hex');
         console.log('server');
         console.log(server_hash_value);
+        // res.render('verify', { h1: blockchain_hash_value, h2: server_hash_value});
+        if (server_hash_value == blockchain_hash_value) {
+          console.log('Download success');
+          // res.render('verify', { h1: blockchain_hash_value, h2: server_hash_value});
+          res.download(path); // magic of download fuction
+        }
+        else {
+          console.log('Download fail')
+        
+        }
       }
     });
-    res.download(path); // magic of download fuction
   });
 
   app.post('/download', function(req, res) { // create download route
