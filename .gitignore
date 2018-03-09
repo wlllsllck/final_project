@@ -1,4 +1,6 @@
-uploads/*
-node_modules/*
+.*
+!.gitignore
+uploads/
+node_modules/
 package-lock.json
 
