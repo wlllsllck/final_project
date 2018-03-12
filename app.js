@@ -3,6 +3,7 @@ var app = express();
 var path = require('path');
 var formidable = require('formidable');
 var fs = require('fs');
+var http = require('http');
 var crypto = require('crypto');
 const contractInstance = require('./deployContract.js');
 const web3 = require('./web3Client.js');
@@ -18,7 +19,6 @@ var con = mysql.createConnection({
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
-app.set('view engine', 'pug');
 
 con.connect(function(err) {
   if (err) throw err;
@@ -36,9 +36,9 @@ con.connect(function(err) {
     res.sendFile(path.join(__dirname, 'views/download.html'));
   });
 
-  app.get('/verify.html', function(req, res){
-    res.sendFile(path.join(__dirname, 'views/verify.html'));
-  });
+  // app.get('/verify.html', function(req, res){
+  //   res.sendFile(path.join(__dirname, 'views/verify.html'));
+  // });
 
   app.get('/:file(*)', function(req, res, next){ // this routes all types of file
     var path=require('path');
@@ -50,7 +50,9 @@ con.connect(function(err) {
     var blockchain_hash_value = '';
     con.query(sql, [file], function (err, result) {
     if (err) throw err;
+      // console.log("0");
       var transaction = result[0].transaction;
+      console.log(transaction);
       var input = web3.eth.getTransaction(transaction).input;
       var temp_string = input.substr(138);
       var temp_string_length = temp_string.length;
@@ -62,27 +64,29 @@ con.connect(function(err) {
       }
       console.log('blockchain');
       console.log(blockchain_hash_value);
+      
+      fs.readFile(path, function(err, data) {
+        if (err) console.log(err);
+        else {
+          shasum.update(data);
+          var server_hash_value = shasum.digest('hex');
+          console.log('server');
+          console.log(server_hash_value);
+          // res.render('verify', { h1: blockchain_hash_value, h2: server_hash_value});
+          if (server_hash_value == blockchain_hash_value) {
+            console.log('Download success');
+            // res.render('verify', { h1: blockchain_hash_value, h2: server_hash_value});
+            res.download(path); // magic of download fuction
+          }
+          else {
+            console.log('Download fail')
+          
+          }
+        }
+
+      });
     });
     
-    fs.readFile(path, function(err, data) {
-      if (err) console.log(err);
-      else {
-        shasum.update(data);
-        var server_hash_value = shasum.digest('hex');
-        console.log('server');
-        console.log(server_hash_value);
-        // res.render('verify', { h1: blockchain_hash_value, h2: server_hash_value});
-        if (server_hash_value == blockchain_hash_value) {
-          console.log('Download success');
-          // res.render('verify', { h1: blockchain_hash_value, h2: server_hash_value});
-          res.download(path); // magic of download fuction
-        }
-        else {
-          console.log('Download fail')
-        
-        }
-      }
-    });
   });
 
   app.post('/download', function(req, res) { // create download route
@@ -163,7 +167,7 @@ con.connect(function(err) {
     form.parse(req);
 
   });
-
+    
 });
 
 var server = app.listen(3000, function(){
