@@ -52,7 +52,7 @@ con.connect(function(err) {
     if (err) throw err;
       // console.log("0");
       var transaction = result[0].transaction;
-      console.log(transaction);
+      // console.log(transaction);
       var input = web3.eth.getTransaction(transaction).input;
       var temp_string = input.substr(138);
       var temp_string_length = temp_string.length;
@@ -62,7 +62,7 @@ con.connect(function(err) {
         //console.log(temp_hash);
         blockchain_hash_value += temp_hash;    
       }
-      console.log('blockchain');
+      console.log('Hash Value from Blockchain');
       console.log(blockchain_hash_value);
       
       fs.readFile(path, function(err, data) {
@@ -70,16 +70,16 @@ con.connect(function(err) {
         else {
           shasum.update(data);
           var server_hash_value = shasum.digest('hex');
-          console.log('server');
+          console.log('Hash Value from Server');
           console.log(server_hash_value);
           // res.render('verify', { h1: blockchain_hash_value, h2: server_hash_value});
           if (server_hash_value == blockchain_hash_value) {
-            console.log('Download success');
+            console.log('Both hash values are equal ==> Download success ');
             // res.render('verify', { h1: blockchain_hash_value, h2: server_hash_value});
             res.download(path); // magic of download fuction
           }
           else {
-            console.log('Download fail')
+            console.log('Both hash values are not equal ==> Download fail')
           
           }
         }
