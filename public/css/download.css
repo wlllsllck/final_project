@@ -5,7 +5,7 @@
   html,
   body {
     height: 100%;
-    background-color: #2980b9;
+    background-color: #d7ccc8;
   }
   
   body {
@@ -14,10 +14,10 @@
   }
   
   .row {
-    margin-top: 80px;
+    margin-top: 50px;
   }
   
-  .upload-btn {
+  /* .upload-btn {
     color: #ffffff;
     background-color: #F89406;
     border: none;
@@ -47,6 +47,21 @@
     border: none;
   }
   
+  .verify-btn {
+    color: #ffffff;
+    background-color: #8e44ad;
+    border: none;
+  }
+  
+  .verify-btn:hover,
+  .verify-btn:focus,
+  .verify-btn:active,
+  .verify-btn.active {
+    color: #ffffff;
+    background-color: #8e44ad;
+    border: none;
+  }
+
   .home-page-btn {
     color: #ffffff;
     background-color: #16a085;
@@ -60,22 +75,22 @@
     color: #ffffff;
     background-color: #16a085;
     border: none;
-  }
+  } */
   
-  h4 {
+  /* h4 {
     padding-bottom: 30px;
     color: #B8BDC1;
-  }
+  } */
   
-  .glyphicon {
+  .glyphicon-custom {
     font-size: 5em;
     color: #9CA3A9;
   }
   
-  h2 {
+  /* h2 {
     margin-top: 15px;
     color: #68757E;
-  }
+  } */
   
   .panel {
     padding-top: 20px;
@@ -94,7 +109,43 @@
   
   @media (min-width: 992px) {
     .container {
-      width: 450px;
+      width: 900px;
     }
   }
   
+  .navbar-custom {
+    background: #1C2331;
+    color: white;
+}
+
+.panel-footer.panel-custom {
+    margin-top: 50px;
+    background: #1C2331;
+    color: white;
+}
+
+a {
+    color: white;
+}
+
+a.custom {
+  color: blue;
+}
+
+.affix {
+    top: 0;
+    width: 100%;
+    z-index: 9999 !important;
+}
+
+.img-custom {
+    width: 799px; /* Width of new image */
+    height: 449px; /* Height of new image */
+}
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 90%;
+}

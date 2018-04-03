@@ -32,3 +32,35 @@
 .page-header{
     text-align:center;
 }
+
+.navbar-custom {
+    background: #1C2331;
+    color: white;
+}
+
+.panel-footer.panel-custom {
+    background: #1C2331;
+    color: white;
+}
+
+a {
+    color: white;
+}
+
+.affix {
+    top: 0;
+    width: 100%;
+    z-index: 9999 !important;
+}
+
+.img-custom {
+    width: 799px; /* Width of new image */
+    height: 449px; /* Height of new image */
+}
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 90%;
+}

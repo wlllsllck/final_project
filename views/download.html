@@ -7,24 +7,45 @@
     <title>File Downloader</title>
     <link rel="icon" href="data:;base64,iVBORw0KGgo=">
     <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link href="css/download.css" rel="stylesheet">
 </head>
 <body>
+
+  <nav class="navbar-custom" data-spy="affix" data-offset-top="197">
+      <div class="container-fluid">
+          <div class="navbar-header">
+              <a class="navbar-brand" href="/">Home</a>
+          </div>
+          <ul class="nav navbar-nav">
+              <li><a href="upload.html">Upload</a></li>
+              <li><a href="download.html">Download</a></li>
+              <li><a href="verify.html">Verify</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+              <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+              <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+          </ul>
+      </div>
+  </nav>
 
   <div class="container">
     <div class="row">
       <div class="col-xs-12">
         <div class="panel panel-default">
           <div class="panel-body">
-            <span class="glyphicon glyphicon-cloud-download"></span>
+            <span class="glyphicon glyphicon-custom glyphicon-cloud-download"></span>
             <h2>File Downloader</h2>
             <h4>Blockchain</h4>
             <table class="table" id="listfile">
                 <thead>
                     <tr>
-                      <th>File Name</th>
-                      <th>Download</th>
+                      <th>ID</th>
+                      <th>UPLOADER</th>  
+                      <th>FILE NAME</th>
+                      <th>UPLOAD AT</th>
+                      <th>YEAR</th>
+                      <th>DOWNLOAD</th>
                     </tr>
                 </thead>
                 <tbody style="text-align: left;">
@@ -35,18 +56,36 @@
                 </tbody>
             </table>
           </div>
-          <div class="panel-body">
+          <!-- <div class="panel-body">
               <a href="/" class="btn btn-lg home-page-btn" role="button">Home Page</a>
               <a href="/upload.html" class="btn btn-lg upload-btn" role="button">Upload</a>
-          </div>
+              <a href="/verify.html" class="btn btn-lg verify-btn" role="button">Verify</a>
+          </div> -->
         </div>
       </div>
     </div>
   </div>
 
+  <!--Footer-->
+  <footer class="panel-footer panel-custom">
+      <!--Copyright-->
+      <div class="footer-copyright py-3 text-center">
+          <br>
+          © 2018 Copyright: 
+          <a href="http://iwing.cpe.ku.ac.th/"> Intelligent Wireless Network Group </a>
+          <br> Kasetsart University 
+          <br> All rights reserved 
+          <br> VERSION 1.0.0
+      </div>
+      <br>
+      <!--/.Copyright-->
+  </footer>
+  <!--/.Footer-->
+
   <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
   <script src='http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js'></script>
   <script src="javascripts/download.js"></script>
+
 </body>
 </html>

@@ -36,23 +36,24 @@ con.connect(function(err) {
     res.sendFile(path.join(__dirname, 'views/download.html'));
   });
 
-  // app.get('/verify.html', function(req, res){
-  //   res.sendFile(path.join(__dirname, 'views/verify.html'));
-  // });
+  app.get('/verify.html', function(req, res){
+    res.sendFile(path.join(__dirname, 'views/verify.html'));
+  });
 
-  app.get('/:file(*)', function(req, res, next){ // this routes all types of file
-    var path=require('path');
+  app.get('/:file(*)', function(req, res){ // this routes all types of file
+    var path = require('path');
     var file = req.params.file;
     var path = path.resolve(".")+'/uploads/'+file;
     var shasum = crypto.createHash(algorithm);
-    //console.log(file);
+    console.log(file);
     var sql = 'SELECT transaction FROM user WHERE file_name = ?';
     var blockchain_hash_value = '';
+    var server_hash_value = '';
     con.query(sql, [file], function (err, result) {
     if (err) throw err;
-      // console.log("0");
+      console.log("0");
       var transaction = result[0].transaction;
-      // console.log(transaction);
+      console.log(transaction);
       var input = web3.eth.getTransaction(transaction).input;
       var temp_string = input.substr(138);
       var temp_string_length = temp_string.length;
@@ -64,23 +65,27 @@ con.connect(function(err) {
       }
       console.log('Hash Value from Blockchain');
       console.log(blockchain_hash_value);
-      
+
       fs.readFile(path, function(err, data) {
         if (err) console.log(err);
         else {
           shasum.update(data);
-          var server_hash_value = shasum.digest('hex');
+          server_hash_value = shasum.digest('hex');
           console.log('Hash Value from Server');
           console.log(server_hash_value);
           // res.render('verify', { h1: blockchain_hash_value, h2: server_hash_value});
           if (server_hash_value == blockchain_hash_value) {
             console.log('Both hash values are equal ==> Download success ');
             // res.render('verify', { h1: blockchain_hash_value, h2: server_hash_value});
-            res.download(path); // magic of download fuction
+            res.download(path, function(err){
+              if (err) throw err;
+              else {
+
+              }
+            }); // magic of download fuction
           }
           else {
-            console.log('Both hash values are not equal ==> Download fail')
-          
+            console.log('Both hash values are not equal ==> Download fail');
           }
         }
 

@@ -4,30 +4,71 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>File Uploader</title>
   <link rel="icon" href="data:;base64,iVBORw0KGgo=">
   <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link href="css/upload.css" rel="stylesheet">
 </head>
 <body>  
+
+  <nav class="navbar-custom" data-spy="affix" data-offset-top="197">
+      <div class="container-fluid">
+          <div class="navbar-header">
+              <a class="navbar-brand" href="/">Home</a>
+          </div>
+          <ul class="nav navbar-nav">
+              <li><a href="upload.html">Upload</a></li>
+              <li><a href="download.html">Download</a></li>
+              <li><a href="verify.html">Verify</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+              <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+              <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+          </ul>
+      </div>
+  </nav>
 
   <div class="container">
     <div class="row">
       <div class="col-xs-12">
         <div class="panel panel-default">
           <div class="panel-body">
-            <span class="glyphicon glyphicon-cloud-upload"></span>
+            <span class="glyphicon glyphicon-custom glyphicon-cloud-upload"></span>
             <h2>File Uploader</h2>
             <h4>Blockchain</h4>
+            <br>
             <div class="progress">
               <div class="progress-bar" role="progressbar"></div>
             </div>
+            <form>
+              <div class="form-group">
+                <label>Uploader</label>
+                <input type="text" class="form-control" id="uploader" placeholder="Enter your name">
+                <small class="form-text text-muted">enter your name without the title (e.g. โค่ดเทพ สุดสวย)</small>
+              </div>
+              <div class="form-group">
+                  <label>Email</label>
+                  <input type="email" class="form-control" id="uploader-email" aria-describedby="emailHelp" placeholder="Enter email">
+                  <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                </div>
+              <div class="form-group">
+                <label>Year</label>
+                <input type="number" class="form-control" id="year" placeholder="Enter a year that you upload">
+                <small class="form-text text-muted">e.g. 2018, 2017, 2016, ...</small>
+              </div>
+            </form>
+                
+
+            <!-- <br>
+            <h4>Enter The Information</h4> -->
             <button class="btn btn-lg upload-btn" type="button">Upload File</button>
           </div>
-          <div class="panel-body">
+          <!-- <div class="panel-body">
               <a href="/" class="btn btn-lg home-page-btn" role="button">Home Page</a>
               <a href="/download.html" class="btn btn-lg download-btn" role="button">Download</a>
-          </div>
+              <a href="/verify.html" class="btn btn-lg verify-btn" role="button">Verify</a>
+          </div> -->
         </div>
       </div>
     </div>
@@ -35,6 +76,22 @@
 
   <input id="upload-input" type="file" name="upload[]" multiple="multiple"></br>
   
+
+  <!--Footer-->
+  <footer class="panel-footer panel-custom">
+      <!--Copyright-->
+      <div class="footer-copyright py-3 text-center">
+          <br>
+          © 2018 Copyright: 
+          <a href="http://iwing.cpe.ku.ac.th/"> Intelligent Wireless Network Group </a>
+          <br> Kasetsart University 
+          <br> All rights reserved 
+          <br> VERSION 1.0.0
+      </div>
+      <br>
+      <!--/.Copyright-->
+  </footer>
+  <!--/.Footer-->
 
   <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
