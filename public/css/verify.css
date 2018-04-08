@@ -5,7 +5,7 @@
 html,
 body {
   height: 100%;
-  background-color: #8e44ad;
+  background-color: #d7ccc8;
 }
 
 body {
@@ -14,10 +14,11 @@ body {
 }
 
 .row {
-  margin-top: 80px;
+  margin-top: 50px;
+  margin-bottom: 50px;
 }
 
-.upload-btn {
+/* .upload-btn {
   color: #ffffff;
   background-color: #F89406;
   border: none;
@@ -30,8 +31,8 @@ body {
   color: #ffffff;
   background-color: #FA8900;
   border: none;
-}
-
+} */
+/*
 .download-btn {
   color: #ffffff;
   background-color: #2980b9;
@@ -44,6 +45,21 @@ body {
 .download-btn.active {
   color: #ffffff;
   background-color: #2980b9;
+  border: none;
+}
+
+.verify-btn {
+  color: #ffffff;
+  background-color: #8e44ad;
+  border: none;
+}
+
+.verify-btn:hover,
+.verify-btn:focus,
+.verify-btn:active,
+.verify-btn.active {
+  color: #ffffff;
+  background-color: #8e44ad;
   border: none;
 }
 
@@ -60,26 +76,27 @@ body {
   color: #ffffff;
   background-color: #16a085;
   border: none;
-}
+} */
 
-h4 {
+/* h4 {
   padding-bottom: 30px;
   color: #B8BDC1;
-}
+} */
 
-.glyphicon {
+.glyphicon-custom {
   font-size: 5em;
   color: #9CA3A9;
 }
 
-h2 {
+/* h2 {
   margin-top: 15px;
   color: #68757E;
-}
+} */
 
 .panel {
   padding-top: 20px;
-  padding-bottom: 20px;
+  padding-bottom: 40px;
+  /* margin-bottom: 40px; */
 }
 
 #upload-input {
@@ -96,4 +113,61 @@ h2 {
   .container {
     width: 450px;
   }
+}
+
+.navbar-custom {
+  width: 100%;
+  background: #1C2331;
+  color: white;
+}
+
+.panel-footer.panel-custom {
+  /* position: fixed; */
+  background: #1C2331;
+  color: white;
+  width: 100%;
+  height: 125px;
+  bottom: 0;
+}
+
+a {
+  color: white;
+}
+
+.affix {
+  top: 0;
+  width: 100%;
+  z-index: 9999 !important;
+}
+
+.img-custom {
+  width: 799px; /* Width of new image */
+  height: 449px; /* Height of new image */
+}
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 90%;
+}
+
+.box__dragndrop,
+.box__uploading,
+.box__success,
+.box__error {
+  display: none;
+}
+
+.box.has-advanced-upload {
+  background-color: white;
+  outline: 2px dashed black;
+  outline-offset: -10px;
+}
+.box.has-advanced-upload .box__dragndrop {
+  display: inline;
+}
+
+.box.is-dragover {
+  background-color: grey;
 }

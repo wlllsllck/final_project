@@ -94,20 +94,44 @@ con.connect(function(err) {
     
   });
 
-  app.post('/download', function(req, res) { // create download route
-      var path=require('path'); // get path
-      var dir=path.resolve(".")+'/uploads/'; // give path
-      fs.readdir(dir, function(err, list) { // read directory return  error or list
-        if (err) return res.json(err);
-        else {
-          console.log(list);
-          res.json(list);
-        }
-      });
+  app.post('/filterSearch', function(req, res) {
+    var uploader = req.body.uploader;
+    var uploader_email = req.body.uploader_email;
+    var year = req.body.year;
+    res.send(req.body);
   });
+
+  app.post('/download', function(req, res) {
+    var sql = 'SELECT * FROM user'
+    con.query(sql, function(err, result) {
+      res.json(result);
+    });
+    
+  });
+ 
+  app.post('/UploadFile', (req, res) => {
+    var uploader = req.body.uploader;
+    var uploader_email = req.body.uploader_email;
+    var year = req.body.year;
+    var fake_files_name = req.body.files;
+    files_name = fake_files_name.substring(12);
+    // console.log(uploader);
+    // console.log(uploader_email);
+    // console.log(year);
+    // console.log(files_name);
+    var sql = 'INSERT INTO user (uploader, email, file_name, year) VALUES (' 
+              + '"' + uploader + '"' + ',' + '"' + uploader_email + '"' + ',' + '"' + files_name + '"' + ',' + year + ')';
+    console.log(sql);
+    con.query(sql, function (err, result) {
+    if (err) throw err;
+      console.log("1 record inserted");
+      
+    });   
+  })
 
   app.post('/upload', function(req, res){
 
+    console.log("hello");
     // create an incoming form object
     var form = new formidable.IncomingForm();
 
@@ -141,13 +165,15 @@ con.connect(function(err) {
               var blockNumber = web3.eth.getTransaction(transaction_id).blockNumber;
               // var input = web3.eth.getTransaction(transaction_id).input;
               // var temp_string = input.substr(138);
-            
-              var sql = 'INSERT INTO user (file_name, transaction, blockNumber) VALUES (' 
-                      + '"' + file_name + '"' + ',' + '"' + transaction_id + '"' +  ',' + '"' + blockNumber + '"' + ')';
-              //console.log(sql);
+              
+              // var sql = 'INSERT INTO user (file_name, transaction, blockNumber) VALUES (' 
+              // + '"' + file_name + '"' + ',' + '"' + transaction_id + '"' +  ',' + '"' + blockNumber + '"' + ')';
+
+              var sql = 'UPDATE user SET transaction = ' + '"' + transaction_id + '"' + ', blockNumber = ' + '"' + blockNumber + '"' + ' WHERE file_name = ' + '"' + file_name + '"';
+              console.log(sql);
               con.query(sql, function (err, result) {
               if (err) throw err;
-                console.log("1 record inserted");
+                console.log("1 record updated");
                 
               });
               // console.log(temp_string);

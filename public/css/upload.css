@@ -15,9 +15,10 @@ body {
 
 .row {
   margin-top: 50px;
+  margin-bottom: 50px;
 }
 
-.upload-btn {
+/* .upload-btn {
   color: #ffffff;
   background-color: #F89406;
   border: none;
@@ -30,7 +31,7 @@ body {
   color: #ffffff;
   background-color: #FA8900;
   border: none;
-}
+} */
 /*
 .download-btn {
   color: #ffffff;

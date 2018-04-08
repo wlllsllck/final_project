@@ -12,7 +12,7 @@
 </head>
 <body>  
 
-  <nav class="navbar-custom" data-spy="affix" data-offset-top="197">
+  <nav class="navbar-custom">
       <div class="container-fluid">
           <div class="navbar-header">
               <a class="navbar-brand" href="/">Home</a>
@@ -41,28 +41,38 @@
             <div class="progress">
               <div class="progress-bar" role="progressbar"></div>
             </div>
-            <form>
+            <form class="UploadFile" id="myform">
               <div class="form-group">
                 <label>Uploader</label>
-                <input type="text" class="form-control" id="uploader" placeholder="Enter your name">
+                <input type="text" class="form-control uploader" placeholder="Enter your name">
                 <small class="form-text text-muted">enter your name without the title (e.g. โค่ดเทพ สุดสวย)</small>
               </div>
               <div class="form-group">
                   <label>Email</label>
-                  <input type="email" class="form-control" id="uploader-email" aria-describedby="emailHelp" placeholder="Enter email">
+                  <input type="email" class="form-control uploader-email" aria-describedby="emailHelp" placeholder="Enter email">
                   <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-                </div>
+              </div>
               <div class="form-group">
                 <label>Year</label>
-                <input type="number" class="form-control" id="year" placeholder="Enter a year that you upload">
+                <input type="number" class="form-control year" placeholder="Enter a year that you uploaded">
                 <small class="form-text text-muted">e.g. 2018, 2017, 2016, ...</small>
               </div>
+              <div class="form-group">
+                  <label>Files</label>
+                  <input type="file" class="form-control files" id="files" name="upload[]" multiple>
+              </div>
+              <br>
+              <br>
+              
+              <!-- <button class="btn btn-lg upload-btn" type="button">Upload File</button> 
+              <input id="upload-input" type="file" name="upload[]" multiple="multiple"></br>  -->
+
+              <input type="submit" class="upload-input" value="Upload">  
             </form>
                 
 
             <!-- <br>
             <h4>Enter The Information</h4> -->
-            <button class="btn btn-lg upload-btn" type="button">Upload File</button>
           </div>
           <!-- <div class="panel-body">
               <a href="/" class="btn btn-lg home-page-btn" role="button">Home Page</a>
@@ -74,7 +84,6 @@
     </div>
   </div>
 
-  <input id="upload-input" type="file" name="upload[]" multiple="multiple"></br>
   
 
   <!--Footer-->

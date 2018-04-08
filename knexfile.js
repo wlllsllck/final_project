@@ -3,6 +3,6 @@ module.exports = {
   connection: {
     user: 'root',
     password: '0910htuyahtip',
-    database: 'file-name-databases'
+    database: 'file-index-database'
   }
 }
