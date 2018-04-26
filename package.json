@@ -1,11 +1,18 @@
 {
   "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.4.3",
+    "ejs": "^2.5.8",
     "express": "^4.16.2",
     "express-fileupload": "^0.4.0",
+    "express-session": "^1.15.6",
     "formidable": "^1.2.0",
     "ganache-cli": "^6.1.0",
     "knex": "^0.14.4",
     "mysql": "^2.15.0",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
     "solc": "^0.4.21",
     "web3": "^0.20.2"
   }
